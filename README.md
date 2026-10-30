@@ -109,7 +109,6 @@ WGO-Bench, same systems:
 | Argus (Pantheon) on GPT-6.1 Sol | 0.038 | 0.295 |
 | NVIDIA FLORA | 0.189 | 0.343 |
 
-Scores by gold segment length: see the [dataset card](https://huggingface.co/datasets/PerceptronAI/EgoChores).
 
 ## Layout
 
