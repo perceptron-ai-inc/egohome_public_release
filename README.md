@@ -81,16 +81,16 @@ Each predicted second is credited when some gold segment covering it agrees, and
 
 | System | Subtask | Hand action | Hand caption | Hand box |
 |---|---|---|---|---|
-| Perceptron egocentric harness | 0.789 | 0.421 | 0.618 | 0.942 |
-| GPT-6 Astra · 4 fps | 0.803 | 0.498 | 0.753 | 0.979 |
-| GPT-6 Astra · 1 fps | 0.776 | 0.479 | 0.729 | 0.865 |
-| Gemini 3.8 Flash · 4 fps | 0.675 | 0.405 | 0.573 | 0.444 |
-| Gemini 3.8 Flash · 1 fps | 0.650 | 0.390 | 0.563 | 0.522 |
-| Glimpse (Elorian) · 4 fps | 0.691 | 0.390 | 0.565 | 0.489 |
-| Glimpse (Elorian) · 1 fps | 0.595 | 0.342 | 0.557 | 0.247 |
-| Argus (Pantheon) on GPT-6 Astra | 0.407 | 0.320 | 0.593 | — |
-| Argus (Pantheon) on GPT-6.1 Sol | 0.367 | 0.324 | 0.589 | — |
-| NVIDIA FLORA | 0.758 | — | — | — |
+| Perceptron egocentric harness | 0.777 | 0.421 | 0.614 | 0.942 |
+| GPT-6 Astra · 4 fps | 0.804 | 0.498 | 0.750 | 0.979 |
+| GPT-6 Astra · 1 fps | 0.773 | 0.479 | 0.727 | 0.865 |
+| Gemini 3.8 Flash · 4 fps | 0.665 | 0.405 | 0.556 | 0.444 |
+| Gemini 3.8 Flash · 1 fps | 0.630 | 0.390 | 0.555 | 0.522 |
+| Glimpse (Elorian) · 4 fps | 0.689 | 0.390 | 0.563 | 0.489 |
+| Glimpse (Elorian) · 1 fps | 0.587 | 0.342 | 0.554 | 0.247 |
+| Argus (Pantheon) on GPT-6 Astra | 0.370 | 0.320 | 0.591 | — |
+| Argus (Pantheon) on GPT-6.1 Sol | 0.310 | 0.324 | 0.590 | — |
+| NVIDIA FLORA | 0.746 | — | — | — |
 
 A failed clip counts 0; — = the system does not produce that annotation. Label judge: gemini-3.5-flash.
 
@@ -109,6 +109,15 @@ WGO-Bench, same systems:
 | Argus (Pantheon) on GPT-6.1 Sol | 0.038 | 0.295 |
 | NVIDIA FLORA | 0.189 | 0.343 |
 
+### Degenerate baselines
+
+Answers that ignore the video, scored with the same metrics and judge.
+
+| Baseline | Subtask | Hand action | Hand caption |
+|---|---|---|---|
+| Whole clip, generic label | 0.000 | 0.175 | 0.000 |
+| 2.5 s windows, generic label | 0.000 | 0.175 | 0.000 |
+| Whole clip, the clip's own majority gold label (oracle) | 0.528 | 0.449 | 0.499 |
 
 ## Layout
 

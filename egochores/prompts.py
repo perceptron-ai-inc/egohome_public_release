@@ -37,8 +37,12 @@ HAND_CAPTION_PROMPT = (
     '{"left": [{"start": 0.0, "end": 3.0, "label": "caption"}, ...], "right": [{"start": 0.0, "end": 3.0, "label": "caption"}, ...]}'
 )
 
-PROMPTS = {"hand_boxes": HAND_BOX_PROMPT, "subtasks": SUBTASK_PROMPT, "hand_actions": HAND_ACTION_PROMPT,
-           "hand_captions": HAND_CAPTION_PROMPT}
+PROMPTS = {
+    "hand_boxes": HAND_BOX_PROMPT,
+    "subtasks": SUBTASK_PROMPT,
+    "hand_actions": HAND_ACTION_PROMPT,
+    "hand_captions": HAND_CAPTION_PROMPT,
+}
 
 
 def judge_prompt(task: str, gold: str, pred: str) -> str:
@@ -59,6 +63,9 @@ def judge_prompt(task: str, gold: str, pred: str) -> str:
         "But the ACTION itself must be the same: return match=false when the manipulation differs, EVEN IF the "
         'same object is mentioned (e.g. "vacuuming the stairs with the hose" vs "holding the vacuum cleaner" — '
         'vacuuming vs holding; "wiping a window" vs "opening a drawer"), or when one is empty/placeholder.\n'
+        "A label that names no specific physical action never matches a specific one: generic descriptions such as "
+        '"doing chores", "cleaning up", "working in the kitchen", "doing the task" or "using the hands" '
+        "are match=false against any specific activity.\n"
         "When genuinely ambiguous, lean match=false.\n"
         'Return only JSON: {"match": true|false, "rationale": "short reason"}'
     )

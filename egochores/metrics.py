@@ -112,8 +112,9 @@ def _clip_to(pred: list[Segment], gold: list[Segment]) -> list[Segment]:
     return [(max(p[0], g[0]), min(p[1], g[1]), p[2]) for p in pred for g in gold if min(p[1], g[1]) > max(p[0], g[0])]
 
 
-def permissible_subsegment_jaccard(gold: dict[str, list[Segment]], pred: dict[str, list[Segment]], accept: Accept
-                                   ) -> tuple[float, dict[str, float | None]]:
+def permissible_subsegment_jaccard(
+    gold: dict[str, list[Segment]], pred: dict[str, list[Segment]], accept: Accept
+) -> tuple[float, dict[str, float | None]]:
     """The score over all tracks, and the same score restricted to gold segments of each length bucket (predictions
     clipped to those gold spans; None when the clip has no gold segment of that length).
 

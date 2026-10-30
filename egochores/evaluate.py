@@ -48,8 +48,15 @@ def evaluate(gold: list[dict], preds: dict[str, dict], judge=None) -> dict:
         if task != "hand_boxes" and task != "hand_actions" and judge is None:
             continue
         if task in ("subtasks", "hand_captions"):
-            judge.decide(task, set().union(*(label_pairs(tracks(task, g[task]), tracks(task, preds.get(g["clip_id"], {}).get(task)))
-                                              for g in gold)))
+            judge.decide(
+                task,
+                set().union(
+                    *(
+                        label_pairs(tracks(task, g[task]), tracks(task, preds.get(g["clip_id"], {}).get(task)))
+                        for g in gold
+                    )
+                ),
+            )
         scores, buckets = [], {name: [] for name, _, _ in LENGTH_BUCKETS}
         for g in gold:
             p = preds.get(g["clip_id"], {}).get(task)
