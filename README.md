@@ -81,16 +81,16 @@ Each predicted second is credited when some gold segment covering it agrees, and
 
 | System | Subtask | Hand action | Hand caption | Hand box |
 |---|---|---|---|---|
-| Perceptron egocentric harness | 0.783 | 0.421 | 0.614 | 0.942 |
-| GPT-6 Astra · 4 fps | 0.804 | 0.498 | 0.750 | 0.979 |
-| GPT-6 Astra · 1 fps | 0.773 | 0.479 | 0.727 | 0.865 |
-| Gemini 3.8 Flash · 4 fps | 0.665 | 0.405 | 0.556 | 0.444 |
-| Gemini 3.8 Flash · 1 fps | 0.630 | 0.390 | 0.555 | 0.522 |
-| Glimpse (Elorian) · 4 fps | 0.689 | 0.390 | 0.563 | 0.489 |
-| Glimpse (Elorian) · 1 fps | 0.587 | 0.342 | 0.554 | 0.247 |
-| Argus (Pantheon) on GPT-6 Astra | 0.370 | 0.320 | 0.591 | — |
-| Argus (Pantheon) on GPT-6.1 Sol | 0.310 | 0.324 | 0.590 | — |
-| NVIDIA FLORA | 0.746 | — | — | — |
+| Perceptron egocentric harness | 0.786 | 0.421 | 0.613 | 0.942 |
+| GPT-6 Astra · 4 fps | 0.798 | 0.498 | 0.749 | 0.979 |
+| GPT-6 Astra · 1 fps | 0.773 | 0.479 | 0.724 | 0.865 |
+| Gemini 3.8 Flash · 4 fps | 0.663 | 0.405 | 0.558 | 0.444 |
+| Gemini 3.8 Flash · 1 fps | 0.639 | 0.390 | 0.557 | 0.522 |
+| Glimpse (Elorian) · 4 fps | 0.682 | 0.390 | 0.560 | 0.489 |
+| Glimpse (Elorian) · 1 fps | 0.590 | 0.353 | 0.560 | 0.247 |
+| Argus (Pantheon) on GPT-6 Astra | 0.362 | 0.336 | 0.593 | — |
+| Argus (Pantheon) on GPT-6.1 Sol | 0.311 | 0.327 | 0.590 | — |
+| NVIDIA FLORA | 0.745 | — | — | — |
 
 A failed clip counts 0; — = the system does not produce that annotation. Label judge: gemini-3.5-flash.
 
@@ -98,16 +98,16 @@ WGO-Bench, same systems:
 
 | System | Semantic E2E F1 | Segment F1 @ IoU 0.75 |
 |---|---|---|
-| Perceptron egocentric harness | 0.308 | 0.401 |
-| GPT-6 Astra · 4 fps | 0.188 | 0.257 |
-| GPT-6 Astra · 1 fps | 0.178 | 0.250 |
+| Perceptron egocentric harness | 0.310 | 0.401 |
+| GPT-6 Astra · 4 fps | 0.194 | 0.263 |
+| GPT-6 Astra · 1 fps | 0.182 | 0.250 |
 | Gemini 3.8 Flash · 4 fps | 0.167 | 0.280 |
-| Gemini 3.8 Flash · 1 fps | 0.143 | 0.255 |
-| Glimpse (Elorian) · 4 fps | 0.158 | 0.246 |
-| Glimpse (Elorian) · 1 fps | 0.204 | 0.298 |
-| Argus (Pantheon) on GPT-6 Astra | 0.039 | 0.321 |
-| Argus (Pantheon) on GPT-6.1 Sol | 0.038 | 0.295 |
-| NVIDIA FLORA | 0.189 | 0.343 |
+| Gemini 3.8 Flash · 1 fps | 0.141 | 0.255 |
+| Glimpse (Elorian) · 4 fps | 0.165 | 0.259 |
+| Glimpse (Elorian) · 1 fps | 0.200 | 0.298 |
+| Argus (Pantheon) on GPT-6 Astra | 0.039 | 0.323 |
+| Argus (Pantheon) on GPT-6.1 Sol | 0.036 | 0.296 |
+| NVIDIA FLORA | 0.196 | 0.343 |
 
 ### Degenerate baselines
 
