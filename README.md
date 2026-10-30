@@ -81,7 +81,7 @@ Each predicted second is credited when some gold segment covering it agrees, and
 
 | System | Subtask | Hand action | Hand caption | Hand box |
 |---|---|---|---|---|
-| Perceptron egocentric harness | 0.777 | 0.421 | 0.614 | 0.942 |
+| Perceptron egocentric harness | 0.783 | 0.421 | 0.614 | 0.942 |
 | GPT-6 Astra · 4 fps | 0.804 | 0.498 | 0.750 | 0.979 |
 | GPT-6 Astra · 1 fps | 0.773 | 0.479 | 0.727 | 0.865 |
 | Gemini 3.8 Flash · 4 fps | 0.665 | 0.405 | 0.556 | 0.444 |
