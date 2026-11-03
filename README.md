@@ -79,35 +79,38 @@ Each predicted second is credited when some gold segment covering it agrees, and
 
 ## Results
 
-| System | Subtask | Hand action | Hand caption | Hand box |
-|---|---|---|---|---|
-| Perceptron egocentric harness | 0.786 | 0.421 | 0.613 | 0.942 |
-| GPT-6 Astra · 4 fps | 0.798 | 0.498 | 0.749 | 0.979 |
-| GPT-6 Astra · 1 fps | 0.773 | 0.479 | 0.724 | 0.865 |
-| Gemini 3.8 Flash · 4 fps | 0.663 | 0.405 | 0.558 | 0.444 |
-| Gemini 3.8 Flash · 1 fps | 0.639 | 0.390 | 0.557 | 0.522 |
-| Glimpse (Elorian) · 4 fps | 0.682 | 0.390 | 0.560 | 0.489 |
-| Glimpse (Elorian) · 1 fps | 0.590 | 0.353 | 0.560 | 0.247 |
-| Argus (Pantheon) on GPT-6 Astra | 0.362 | 0.336 | 0.593 | — |
-| Argus (Pantheon) on GPT-6.1 Sol | 0.311 | 0.327 | 0.590 | — |
-| NVIDIA FLORA | 0.745 | — | — | — |
+| System | Subtask | Hand action | Hand caption | Hand box | Timeline $ / video-hour |
+|---|---:|---:|---:|---:|---:|
+| Perceptron Egocentric, 4 fps (default) | 0.785 | 0.421 | 0.613 | 0.942 | $9 |
+| Perceptron Egocentric, 8 fps (option) | **0.796** | n/r | n/r | n/r | ≈ $15 |
+| GPT-6 Astra, 4 fps frames | 0.795 | **0.498** | **0.749** | **0.979** | ≈ $76 |
+| GPT-6 Astra, 1 fps frames | 0.773 | 0.479 | 0.724 | 0.865 | ≈ $20 |
+| Gemini 3.8 Flash, 4 fps video | 0.660 | 0.405 | 0.558 | 0.444 | **≈ $1.3** |
+| Gemini 3.8 Flash, 1 fps video | 0.639 ‡ | 0.390 | 0.557 | 0.522 | n/r |
+| Glimpse (Elorian), 4 fps video | 0.685 | 0.390 | 0.560 | 0.489 | ≈ $2.8 |
+| Glimpse (Elorian), 1 fps video | 0.590 ‡ | 0.353 | 0.560 | 0.247 | n/r |
+| Argus (Pantheon), GPT-6 Astra | 0.361 | 0.336 | 0.593 | — | $24.17 |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.307 | 0.327 | 0.590 | — | $7.76 |
+| FLORA (NVIDIA) | 0.744 | — | — | — | $35.39 |
 
-A failed clip counts 0; — = the system does not produce that annotation. Label judge: gemini-3.5-flash.
+Best in bold. A failed clip counts 0; — means the system does not produce that annotation; n/r means not reported for that setting. Subtask scores cover the same 135 clips; ‡ marks scores over all 137 clips, as are the hand action, hand caption and hand box columns. Perceptron subtask results are averaged across three runs at 4 fps and two runs at 8 fps; other systems were run once. Costs marked ≈ are estimates. Label judge: gemini-3.5-flash.
 
-WGO-Bench, same systems:
+### Subtask score by gold segment length
 
-| System | Semantic E2E F1 | Segment F1 @ IoU 0.75 |
-|---|---|---|
-| Perceptron egocentric harness | 0.310 | 0.401 |
-| GPT-6 Astra · 4 fps | 0.194 | 0.263 |
-| GPT-6 Astra · 1 fps | 0.182 | 0.250 |
-| Gemini 3.8 Flash · 4 fps | 0.167 | 0.280 |
-| Gemini 3.8 Flash · 1 fps | 0.141 | 0.255 |
-| Glimpse (Elorian) · 4 fps | 0.165 | 0.259 |
-| Glimpse (Elorian) · 1 fps | 0.200 | 0.298 |
-| Argus (Pantheon) on GPT-6 Astra | 0.039 | 0.323 |
-| Argus (Pantheon) on GPT-6.1 Sol | 0.036 | 0.296 |
-| NVIDIA FLORA | 0.196 | 0.343 |
+| System | All | < 0.5 s | 0.5–1 s | > 1 s |
+|---|---:|---:|---:|---:|
+| Perceptron Egocentric, 4 fps (default) | 0.785 | 0.559 | 0.609 | 0.812 |
+| Perceptron Egocentric, 8 fps (option) | **0.796** | 0.555 | **0.667** | 0.822 |
+| GPT-6 Astra, 4 fps frames | 0.795 | 0.503 | 0.643 | **0.829** |
+| GPT-6 Astra, 1 fps frames | 0.773 | **0.595** | 0.492 | 0.805 |
+| Gemini 3.8 Flash, 4 fps video | 0.660 | 0.375 | 0.381 | 0.692 |
+| Gemini 3.8 Flash, 1 fps video | 0.639 ‡ | 0.361 ‡ | 0.320 ‡ | 0.670 ‡ |
+| Glimpse (Elorian), 4 fps video | 0.685 | 0.380 | 0.400 | 0.716 |
+| Glimpse (Elorian), 1 fps video | 0.590 ‡ | 0.328 ‡ | 0.279 ‡ | 0.616 ‡ |
+| Argus (Pantheon), GPT-6 Astra | 0.361 | 0.135 | 0.119 | 0.375 |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.307 | 0.098 | 0.108 | 0.323 |
+| FLORA (NVIDIA) | 0.744 | 0.579 | 0.609 | 0.774 |
+| *Clips with a step of this length* | 135 | 24 | 59 | 135 |
 
 ### Degenerate baselines
 
@@ -118,6 +121,46 @@ Answers that ignore the video, scored with the same metrics and judge.
 | Whole clip, generic label | 0.000 | 0.175 | 0.000 |
 | 2.5 s windows, generic label | 0.000 | 0.175 | 0.000 |
 | Whole clip, the clip's own majority gold label (oracle) | 0.528 | 0.449 | 0.499 |
+
+## Citation
+
+```bibtex
+@misc{perceptron2026egohome,
+  title={EgoHome: 2 hours of human-annotated egocentric video},
+  author={{Perceptron}},
+  year={2026},
+  month={nov},
+  url={https://www.perceptron.inc/blog/egohome}
+}
+```
+
+## References
+
+```bibtex
+@misc{dyna2026dyna2,
+  title={Dyna-2: A 1-Million-Hour Scaling Law for World-Action Models},
+  author={{Dyna Robotics}},
+  year={2026},
+  month={aug},
+  url={https://www.dyna.co/dyna-2}
+}
+
+@misc{macrodata2026segmenting,
+  title={Segmenting Robot Video into Actionable Subtasks},
+  author={{Macrodata Labs}},
+  year={2026},
+  month={jun},
+  url={https://macrodata.co/blog/annotating-robot-video-subtasks}
+}
+
+@inproceedings{grauman2022ego4d,
+  title={Ego4D: Around the World in 3,000 Hours of Egocentric Video},
+  author={Grauman, Kristen and Westbury, Andrew and Byrne, Eugene and Chavis, Zachary and Furnari, Antonino and Girdhar, Rohit and Hamburger, Jackson and Jiang, Hao and Liu, Miao and Liu, Xingyu and Martin, Miguel and Nagarajan, Tushar and Radosavovic, Ilija and Ramakrishnan, Santhosh Kumar and Ryan, Fiona and Sharma, Jayant and Wray, Michael and Xu, Mengmeng and Xu, Eric Zhongcong and Zhao, Chen and Bansal, Siddhant and Batra, Dhruv and Cartillier, Vincent and Crane, Sean and Do, Tien and Doulaty, Morrie and Erapalli, Akshay and Feichtenhofer, Christoph and Fragomeni, Adriano and Fu, Qichen and Gebreselasie, Abrham and Gonzalez, Cristina and Hillis, James and Huang, Xuhua and Huang, Yifei and Jia, Wenqi and Khoo, Weslie and Kolar, Jachym and Kottur, Satwik and Kumar, Anurag and Landini, Federico and Li, Chao and Li, Yanghao and Li, Zhenqiang and Mangalam, Karttikeya and Modhugu, Raghava and Munro, Jonathan and Murrell, Tullie and Nishiyasu, Takumi and Price, Will and Ruiz Puentes, Paola and Ramazanova, Merey and Sari, Leda and Somasundaram, Kiran and Southerland, Audrey and Sugano, Yusuke and Tao, Ruijie and Vo, Minh and Wang, Yuchen and Wu, Xindi and Yagi, Takuma and Zhao, Ziwei and Zhu, Yunyi and Arbelaez, Pablo and Crandall, David and Damen, Dima and Farinella, Giovanni Maria and Fuegen, Christian and Ghanem, Bernard and Ithapu, Vamsi Krishna and Jawahar, C. V. and Joo, Hanbyul and Kitani, Kris and Li, Haizhou and Newcombe, Richard and Oliva, Aude and Park, Hyun Soo and Rehg, James M. and Sato, Yoichi and Shi, Jianbo and Shou, Mike Zheng and Torralba, Antonio and Torresani, Lorenzo and Yan, Mingfei and Malik, Jitendra},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2022},
+  url={https://arxiv.org/abs/2110.07058}
+}
+```
 
 ## Layout
 
