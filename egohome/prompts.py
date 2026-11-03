@@ -3,7 +3,7 @@
 Coordinates are [x_min, y_min, x_max, y_max] normalized to 0-1000 of the frame; times are seconds from the clip start.
 """
 
-from egochores.ego4d import EGO4D_FHO_VERBS
+from egohome.ego4d import EGO4D_FHO_VERBS
 
 EGO4D_VERBS = ", ".join(v.partition("_(")[0] for v in EGO4D_FHO_VERBS)
 

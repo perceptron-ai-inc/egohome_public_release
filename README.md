@@ -1,6 +1,6 @@
-# EgoChores: prompts and metrics
+# EgoHome: prompts and metrics
 
-Evaluation code for **EgoChores-2h**, 137 human-annotated egocentric household-chore clips (1.99 h, 1920×1080, 30 fps) with four annotation types on the same videos.
+Evaluation code for **EgoHome-2h**, 137 human-annotated egocentric household-chore clips (1.99 h, 1920×1080, 30 fps) with four annotation types on the same videos.
 
 | Task | Column | Unit | Metric |
 |---|---|---|---|
@@ -9,12 +9,12 @@ Evaluation code for **EgoChores-2h**, 137 human-annotated egocentric household-c
 | Hand actions | `hand_actions` | left / right segments, Ego4D FHO verbs (118) | permissible subsegment Jaccard (verb class) |
 | Hand captions | `hand_captions` | left / right open-vocabulary segments | permissible subsegment Jaccard (LLM label judge) |
 
-Dataset: [`PerceptronAI/EgoChores`](https://huggingface.co/datasets/PerceptronAI/EgoChores)
+Dataset: [`PerceptronAI/EgoHome`](https://huggingface.co/datasets/PerceptronAI/EgoHome)
 
 ## Install
 
 ```bash
-pip install "git+https://github.com/perceptron-ai-inc/egochores_public_release#egg=egochores[hub]"
+pip install "git+https://github.com/perceptron-ai-inc/egohome_public_release#egg=egohome[hub]"
 ```
 
 No dependencies beyond the standard library. `[hub]` adds `huggingface_hub` to fetch the gold annotations.
@@ -40,11 +40,11 @@ Write one JSON object per clip, in the same schema. Include only the tasks you p
 
 ```bash
 export GEMINI_API_KEY=...            # label judge for subtasks and hand captions
-python -m egochores.evaluate --predictions preds.jsonl
-python -m egochores.evaluate --predictions preds.jsonl --no-judge   # hand boxes + hand actions only
+python -m egohome.evaluate --predictions preds.jsonl
+python -m egohome.evaluate --predictions preds.jsonl --no-judge   # hand boxes + hand actions only
 ```
 
-The prompts we use for every task are in [`egochores/prompts.py`](egochores/prompts.py). Each one asks for exactly this JSON.
+The prompts we use for every task are in [`egohome/prompts.py`](egohome/prompts.py). Each one asks for exactly this JSON.
 
 ## Metrics
 
@@ -122,10 +122,10 @@ Answers that ignore the video, scored with the same metrics and judge.
 ## Layout
 
 ```
-egochores/metrics.py    centroid hit fraction, permissible subsegment Jaccard (+ length buckets)
-egochores/ego4d.py      the 118 Ego4D FHO verbs and an alias/inflection normalizer
-egochores/prompts.py    task prompts and the label-judge prompt
-egochores/judge.py      Gemini label judge (cached); any (gold, pred) -> bool callable works
-egochores/evaluate.py   CLI
+egohome/metrics.py    centroid hit fraction, permissible subsegment Jaccard (+ length buckets)
+egohome/ego4d.py      the 118 Ego4D FHO verbs and an alias/inflection normalizer
+egohome/prompts.py    task prompts and the label-judge prompt
+egohome/judge.py      Gemini label judge (cached); any (gold, pred) -> bool callable works
+egohome/evaluate.py   CLI
 tests/                  metric tests
 ```

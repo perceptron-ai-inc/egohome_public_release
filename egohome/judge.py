@@ -15,7 +15,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from egochores.prompts import judge_prompt
+from egohome.prompts import judge_prompt
 
 DEFAULT_MODEL = "gemini-3.5-flash"
 _URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"

@@ -1,7 +1,7 @@
 [project]
-name = "egochores"
+name = "egohome"
 version = "0.1.0"
-description = "Prompts and metrics for the EgoChores egocentric annotation benchmark"
+description = "Prompts and metrics for the EgoHome egocentric annotation benchmark"
 requires-python = ">=3.10"
 dependencies = []
 
@@ -13,4 +13,4 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["egochores"]
+packages = ["egohome"]

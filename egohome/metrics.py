@@ -1,4 +1,4 @@
-"""EgoChores metrics.
+"""EgoHome metrics.
 
 Hand boxes: centroid hit fraction. Each gold (frame, hand) is a hit when the predicted box for that hand at that frame
 (linearly interpolated between the prediction's own frames, never extrapolated) has its centroid strictly inside the
@@ -16,7 +16,7 @@ from __future__ import annotations
 import bisect
 from collections.abc import Callable, Iterable
 
-from egochores.ego4d import normalize_ego4d_fho_verb
+from egohome.ego4d import normalize_ego4d_fho_verb
 
 Segment = tuple[float, float, str]  # (start_sec, end_sec, label)
 Box = tuple[float, float, float, float]  # (x_min, y_min, x_max, y_max), 0-1000

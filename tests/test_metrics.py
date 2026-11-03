@@ -1,4 +1,4 @@
-from egochores.metrics import centroid_hit_fraction, ego4d_verb_accept, permissible_subsegment_jaccard
+from egohome.metrics import centroid_hit_fraction, ego4d_verb_accept, permissible_subsegment_jaccard
 
 
 def same_words(g, p):

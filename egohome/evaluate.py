@@ -1,6 +1,6 @@
-"""Score predictions on EgoChores.
+"""Score predictions on EgoHome.
 
-    python -m egochores.evaluate --predictions preds.jsonl [--gold PerceptronAI/EgoChores | metadata.jsonl]
+    python -m egohome.evaluate --predictions preds.jsonl [--gold PerceptronAI/EgoHome | metadata.jsonl]
 
 ``preds.jsonl``: one JSON object per clip with ``clip_id`` and any of the dataset's annotation columns
 (``hand_boxes``, ``subtasks``, ``hand_actions``, ``hand_captions``) in the same schema. A clip missing from the file,
@@ -13,7 +13,7 @@ import argparse
 import json
 from pathlib import Path
 
-from egochores.metrics import (
+from egohome.metrics import (
     LENGTH_BUCKETS,
     as_segments,
     centroid_hit_fraction,
@@ -78,7 +78,7 @@ def evaluate(gold: list[dict], preds: dict[str, dict], judge=None) -> dict:
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--predictions", required=True)
-    ap.add_argument("--gold", default="PerceptronAI/EgoChores")
+    ap.add_argument("--gold", default="PerceptronAI/EgoHome")
     ap.add_argument("--judge-model", default=None, help="Gemini model for the label judge (default gemini-3.5-flash)")
     ap.add_argument("--no-judge", action="store_true", help="score only hand boxes and hand actions (no LLM calls)")
     args = ap.parse_args()
@@ -90,7 +90,7 @@ def main():
             preds[row["clip_id"]] = row
     judge = None
     if not args.no_judge:
-        from egochores.judge import DEFAULT_MODEL, GeminiJudge
+        from egohome.judge import DEFAULT_MODEL, GeminiJudge
 
         judge = GeminiJudge(args.judge_model or DEFAULT_MODEL)
     print(json.dumps(evaluate(gold, preds, judge), indent=2))
