@@ -123,7 +123,7 @@ Best in bold. ‡ Scored over all 137 clips; every other row covers the same 135
 
 To measure hand box prediction accuracy, we simply ask each model to produce timestamped bounding boxes for the hand locations throughout the video. For each frame we check whether the centroid of the predicted box falls inside of the ground truth box, we then divide by the total number of frames for which there's an annotation.
 
-We evaluate each model only on the subset of the ground truth corresponding to its configured FPS. For instance Gemini 1FPS would measure the centroid hit fraction only on the 60 frames sampled. Technically this metric is slightly more lenient to lower FPS configurations since higher frame rates give more opportunities to be incorrect, but in practice we see most models perform better at higher frame rate.
+We evaluate each model only on the subset of the ground truth corresponding to its configured FPS. For instance Gemini 1 FPS would measure the centroid hit fraction only on the 60 frames sampled. Technically this metric is slightly more lenient to lower FPS configurations since higher frame rates give more opportunities to be incorrect, but in practice we see most models perform better at higher frame rate.
 
 Mathematically this can be expressed as
 
@@ -178,7 +178,7 @@ Let $P$ and $T$ be the predicted and ground-truth segments. Each segment $s$ has
 
 #### Degenerate baselines
 
-In order to ensure the metric isn't trivially gameable check the metric can't be gamed, we scored answers that ignore the video entirely, with the same metric and judge. Generic labels are "doing chores" for subtasks, "using the hands" for captions and "hold", the most frequent verb, for hand actions.
+In order to ensure the metric isn't trivially gameable, we chose a few degenerate baselines and determined how they'd be rated by the metric. We chose three types of generic baseline: 1. Choosing a generic label like "doing chores" and applying it to the whole timeline 2. Choosing a generic label and applying at fixed 2.5s windows 3. Taking the most common/longest true clip from the ground truth and filling the whole video timeline with it as a single task.
 
 | Answer (no video used) | Subtask | Hand action | Hand caption |
 |---|---:|---:|---:|
@@ -186,9 +186,24 @@ In order to ensure the metric isn't trivially gameable check the metric can't be
 | Fixed 2.5 s windows, generic label | 0.000 | 0.175 | 0.000 |
 | One segment for the whole clip, the clip's own most common true label | 0.528 | 0.449 | 0.499 |
 
-Generic labels earn nothing on subtasks and captions. A constant "hold" earns 0.175 on hand actions, the share of time hands really are holding. The best cheap answer is the right activity at the coarsest granularity, which earns about half credit, against 0.77–0.80 for the best systems on subtasks.
+Generic labels earn nothing on subtasks and captions. A constant "hold" earns 0.175 on hand actions, the share of time hands really are holding. These degenerate baselines represent a floor of how good a trivial baseline is at the task. The table below shows which models exceed the trivial baseline on the three tasks.
 
-Label judge: gemini-3.5-flash, temperature 0, thinking off; prompt in the repository. Re-judging the same outputs moves a system's score by about ±0.01.
+| System | Subtask | Hand action | Hand caption |
+|---|---:|---:|---:|
+| Perceptron Egocentric, 4 fps (default) | 0.785 ✓ | 0.421 ✗ | 0.613 ✓ |
+| Perceptron Egocentric, 8 fps (option) | 0.796 ✓ | n/r | n/r |
+| GPT-6 Astra, 4 fps frames | 0.795 ✓ | 0.498 ✓ | 0.749 ✓ |
+| GPT-6 Astra, 1 fps frames | 0.773 ✓ | 0.479 ✓ | 0.724 ✓ |
+| Gemini 3.8 Flash, 4 fps video | 0.660 ✓ | 0.405 ✗ | 0.558 ✓ |
+| Gemini 3.8 Flash, 1 fps video | 0.639 ‡ ✓ | 0.390 ✗ | 0.557 ✓ |
+| Glimpse (Elorian), 4 fps video | 0.685 ✓ | 0.390 ✗ | 0.560 ✓ |
+| Glimpse (Elorian), 1 fps video | 0.590 ‡ ✓ | 0.353 ✗ | 0.560 ✓ |
+| Argus (Pantheon), GPT-6 Astra | 0.361 ✗ | 0.336 ✗ | 0.593 ✓ |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.307 ✗ | 0.327 ✗ | 0.590 ✓ |
+| FLORA (NVIDIA) | 0.744 ✓ | — | — |
+| *Best trivial baseline* | 0.528 | 0.449 | 0.499 |
+
+✓ exceeds the best trivial baseline for that task; ✗ does not. n/r = not reported for that setting. — = the system does not produce that annotation.
 
 ## Citation
 
