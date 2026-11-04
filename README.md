@@ -48,21 +48,21 @@ The prompts we use for every task are in [`egohome/prompts.py`](egohome/prompts.
 
 ## How different models stack up
 
-| System | Subtask | Hand action | Hand caption | Hand box | Failed | Timeline $ / video-hour | All tasks $ / video-hour |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| Perceptron Egocentric, 4 fps (default) | 0.785 | 0.421 | 0.613 | 0.942 | 3/548 | $9 | |
-| Perceptron Egocentric, 8 fps (option) | **0.796** | n/r | n/r | n/r | n/r | ≈ $15 | n/r |
-| GPT-6 Astra, 4 fps frames | 0.795 | **0.498** | **0.749** | **0.979** | 0/548 | ≈ $76 | $244.66 |
-| GPT-6 Astra, 1 fps frames | 0.773 | 0.479 | 0.724 | 0.865 | 0/548 | ≈ $20 | $65.07 |
-| Gemini 3.8 Flash, 4 fps video | 0.660 | 0.405 | 0.558 | 0.444 | 0/548 | **≈ $1.3** | $5.55 |
-| Gemini 3.8 Flash, 1 fps video | 0.639 ‡ | 0.390 | 0.557 | 0.522 | 0/548 | n/r | **$1.88** |
-| Glimpse (Elorian), 4 fps video | 0.685 | 0.390 | 0.560 | 0.489 | 0/548 | ≈ $2.8 | $9.64 |
-| Glimpse (Elorian), 1 fps video | 0.590 ‡ | 0.353 | 0.560 | 0.247 | 0/548 | n/r | $9.45 |
-| Argus (Pantheon), GPT-6 Astra | 0.361 | 0.336 | 0.593 | — | 0/411 | $24.17 | $24.17 |
-| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.307 | 0.327 | 0.590 | — | 0/411 | $7.76 | $7.76 |
-| FLORA (NVIDIA) | 0.744 | — | — | — | 0/137 | $35.39 | $35.39 |
+| System | Subtask | Hand action | Hand caption | Hand box | Failed | Subtask $ / video-hour |
+|---|---:|---:|---:|---:|---:|---:|
+| Perceptron Egocentric, 4 fps (default) | 0.785 | 0.421 | 0.613 | 0.942 | 3/548 | $9 |
+| Perceptron Egocentric, 8 fps (option) | **0.796** | n/r | n/r | n/r | n/r | ≈ $15 |
+| GPT-6 Astra, 4 fps frames | 0.795 | **0.498** | **0.749** | **0.979** | 0/548 | ≈ $76 |
+| GPT-6 Astra, 1 fps frames | 0.773 | 0.479 | 0.724 | 0.865 | 0/548 | ≈ $20 |
+| Gemini 3.8 Flash, 4 fps video | 0.660 | 0.405 | 0.558 | 0.444 | 0/548 | **≈ $1.3** |
+| Gemini 3.8 Flash, 1 fps video | 0.639 ‡ | 0.390 | 0.557 | 0.522 | 0/548 | n/r |
+| Glimpse (Elorian), 4 fps video | 0.685 | 0.390 | 0.560 | 0.489 | 0/548 | ≈ $2.8 |
+| Glimpse (Elorian), 1 fps video | 0.590 ‡ | 0.353 | 0.560 | 0.247 | 0/548 | n/r |
+| Argus (Pantheon), GPT-6 Astra | 0.361 | 0.336 | 0.593 | — | 0/411 | $24.17 |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.307 | 0.327 | 0.590 | — | 0/411 | $7.76 |
+| FLORA (NVIDIA) | 0.744 | — | — | — | 0/137 | $35.39 |
 
-Permissible subsegment Jaccard (subtask, hand action, hand caption) and centroid hit fraction (hand box); a failed clip counts 0. Best in bold. — = the system does not produce that annotation. n/r = not reported for that setting. Inputs: GPT-6 Astra as timestamped frames (768 px), Gemini and Glimpse as native video. Subtask scores cover the same 135 clips; Perceptron results are averaged across three runs at 4 fps and two runs at 8 fps, and other systems were run once. ‡ Scored over all 137 clips, as are the hand action, hand caption and hand box columns. Timeline $ uses Perceptron's customer price, direct API charges, or FLORA's GPU runtime cost; Argus costs also include hand labels, and costs marked ≈ are estimates of the timeline's share of a run billed across all tasks. All tasks $ is from billed usage (API models), Modal compute + model calls (harness), H100 time (FLORA).
+Permissible subsegment Jaccard (subtask, hand action, hand caption) and centroid hit fraction (hand box); a failed clip counts 0. Best in bold. — = the system does not produce that annotation. n/r = not reported for that setting. Inputs: GPT-6 Astra as timestamped frames (768 px), Gemini and Glimpse as native video. Subtask scores cover the same 135 clips; Perceptron results are averaged across three runs at 4 fps and two runs at 8 fps, and other systems were run once. ‡ Scored over all 137 clips, as are the hand action, hand caption and hand box columns. Subtask $ uses Perceptron's customer price, direct API charges, or FLORA's GPU runtime cost; Argus costs also include hand labels, and costs marked ≈ are estimates of the subtask share of a run billed across all tasks.
 
 ### Subtask score by gold segment length
 
