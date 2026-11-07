@@ -103,15 +103,15 @@ The Perceptron Egocentric harness matches or beats every other system on subtask
 | Perceptron Egocentric, 8 fps (option) | **0.798** | 0.421 | 0.626 | 0.973 | ≈ $15 |
 | GPT-6 Astra, 4 fps frames | 0.797 | **0.498** | **0.749** | **0.979** | ≈ $76 |
 | GPT-6 Astra, 1 fps frames | 0.775 | 0.479 | 0.724 | 0.865 | ≈ $20 |
-| Gemini 3.8 Flash, 4 fps video | 0.663 | 0.405 | 0.558 | 0.444 | **≈ $1.3** |
-| Gemini 3.8 Flash, 1 fps video | 0.639 | 0.390 | 0.557 | 0.522 | n/r |
+| Gemini 3.8 Flash, 4 fps video | 0.663 | 0.405 | 0.558 | 0.454 | **≈ $1.3** |
+| Gemini 3.8 Flash, 1 fps video | 0.639 | 0.390 | 0.557 | 0.574 | n/r |
 | Glimpse (Elorian), 4 fps video | 0.689 | 0.390 | 0.560 | 0.489 | ≈ $2.8 |
 | Glimpse (Elorian), 1 fps video | 0.590 | 0.353 | 0.560 | 0.247 | n/r |
 | Argus (Pantheon), GPT-6 Astra | 0.367 | 0.336 | 0.593 | — | $24.17 |
 | Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.315 | 0.327 | 0.590 | — | $7.76 |
 | FLORA (NVIDIA) | 0.747 | — | — | — | $35.39 |
 
-**Table 3.** EgoHome-2h results by system. Permissible subsegment Jaccard (subtask, hand action, hand caption) and centroid hit fraction (hand box). Best in bold. — = the system does not produce that annotation. n/r = not reported for that setting. Inputs: GPT-6 Astra as timestamped frames (768 px), Gemini and Glimpse as native video. All scores cover all 137 clips; Perceptron results are averaged across three runs at 4 fps and two runs at 8 fps, and other systems were run once. Subtask $ uses Perceptron's customer price, direct API charges, or FLORA's GPU runtime cost; Argus costs also include hand labels, and costs marked ≈ are estimates of the subtask share of a run billed across all tasks.
+**Table 3.** EgoHome-2h results by system. Permissible subsegment Jaccard (subtask, hand action, hand caption) and centroid hit fraction (hand box). Best in bold. — = the system does not produce that annotation. n/r = not reported for that setting. Inputs: GPT-6 Astra as timestamped frames (768 px), Gemini and Glimpse as native video. All scores cover all 137 clips; Perceptron results are averaged across three runs at 4 fps and two runs at 8 fps, and other systems were run once. Gemini stamps its boxes half a sampling interval early, so its hand box scores use timestamps shifted by 0.5 s at 1 fps and 0.125 s at 4 fps. Subtask $ uses Perceptron's customer price, direct API charges, or FLORA's GPU runtime cost; Argus costs also include hand labels, and costs marked ≈ are estimates of the subtask share of a run billed across all tasks.
 
 ### Fine-grained results by gold segment length
 
@@ -336,7 +336,7 @@ Here is the percentage of time the right and left hand are on screen in the corp
 
 ```bibtex
 @misc{perceptron2026egohome,
-  title={{EgoHome}: the world's largest, multi-annotation egocentric benchmark to date},
+  title={{EgoHome}: benchmarking egocentric video understanding at sub-second resolution},
   author={{Perceptron}},
   year={2026},
   month={nov},
