@@ -352,9 +352,13 @@ The raw footage for this data was collected by [HumanSignal](https://humansignal
 
 1. Dyna Robotics. Dyna-2: A 1-Million-Hour Scaling Law for World-Action Models. August 2026. [dyna.co/dyna-2](https://www.dyna.co/dyna-2)
 
-2. Macrodata Labs. Segmenting Robot Video into Actionable Subtasks. June 2026. [macrodata.co/blog/annotating-robot-video-subtasks](https://macrodata.co/blog/annotating-robot-video-subtasks)
+2. Physical Intelligence. A Steerable Model with Emergent Capabilities. April 2026. [pi.website/blog/pi07](https://www.pi.website/blog/pi07)
 
-3. K. Grauman, A. Westbury, E. Byrne, et al. Ego4D: Around the World in 3,000 Hours of Egocentric Video. CVPR 2022. [arXiv:2110.07058](https://arxiv.org/abs/2110.07058)
+3. Generalist. GEN-1: Scaling Embodied Foundation Models to Mastery. April 2026. [generalistai.com/blog/gen-1](https://generalistai.com/blog/gen-1)
+
+4. Macrodata Labs. Segmenting Robot Video into Actionable Subtasks. June 2026. [macrodata.co/blog/annotating-robot-video-subtasks](https://macrodata.co/blog/annotating-robot-video-subtasks)
+
+5. K. Grauman, A. Westbury, E. Byrne, et al. Ego4D: Around the World in 3,000 Hours of Egocentric Video. CVPR 2022. [arXiv:2110.07058](https://arxiv.org/abs/2110.07058)
 
 ## Layout
 
