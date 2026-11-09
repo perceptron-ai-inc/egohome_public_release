@@ -53,7 +53,7 @@ The prompts we use for every task are in [`egohome/prompts.py`](egohome/prompts.
 For each hand $h$, the prediction is a box track $\hat b_h(f)$, linearly interpolated between the predicted frames $f$ and undefined outside them. Let $\mathcal G$ be the gold (frame, hand) pairs with gold box $b_{f,h}$, and let $\mathcal E$ be the predicted boxes outside the time range of their hand's gold track. Then
 
 $$
-\mathrm{CHF} \;=\; \frac{\big|\{(f,h)\in\mathcal G \;:\; \hat b_h(f)\ \text{defined} \;\wedge\; c(\hat b_h(f)) \in \operatorname{int} b_{f,h}\}\big|}{|\mathcal G| + |\mathcal E|},
+\mathrm{CHF} \;=\; \frac{\big|\{(f,h)\in\mathcal G \;:\; \hat b_h(f)\ \text{defined} \;\wedge\; c(\hat b_h(f)) \in \mathrm{int}\, b_{f,h}\}\big|}{|\mathcal G| + |\mathcal E|},
 \qquad c(b) = \Big(\tfrac{x_1+x_2}{2}, \tfrac{y_1+y_2}{2}\Big).
 $$
 
@@ -79,35 +79,54 @@ Each predicted second is credited when some gold segment covering it agrees, and
 
 ## Results
 
-| System | Subtask | Hand action | Hand caption | Hand box |
+The numbers below match the [Perceptron Egocentric 1.0](https://www.perceptron.inc/blog/introducing-perceptron-egocentric-1-0) and [EgoHome](https://www.perceptron.inc/blog/egohome) blog posts.
+
+EgoHome, all 137 clips (higher is better; cost lower is better):
+
+| System | Subtask | Hand action | Hand caption | Hand box | Subtask $ / video-hour |
+|---|---|---|---|---|---|
+| Perceptron Egocentric, 4 fps (default) | 0.787 | 0.421 | 0.613 | 0.942 | $9 |
+| Perceptron Egocentric, 8 fps (option) | **0.798** | 0.421 | 0.626 | 0.973 | ≈ $15 |
+| GPT-6 Astra, 4 fps frames | 0.797 | **0.498** | **0.749** | **0.979** | ≈ $76 |
+| GPT-6 Astra, 1 fps frames | 0.775 | 0.479 | 0.724 | 0.865 | ≈ $20 |
+| Gemini 3.8 Flash, 4 fps video | 0.663 | 0.405 | 0.558 | 0.454 | **≈ $1.3** |
+| Gemini 3.8 Flash, 1 fps video | 0.639 | 0.390 | 0.557 | 0.574 | n/r |
+| Glimpse (Elorian), 4 fps video | 0.689 | 0.390 | 0.560 | 0.489 | ≈ $2.8 |
+| Glimpse (Elorian), 1 fps video | 0.590 | 0.353 | 0.560 | 0.247 | n/r |
+| Argus (Pantheon), GPT-6 Astra | 0.367 | 0.336 | 0.593 | — | $24.17 |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.315 | 0.327 | 0.590 | — | $7.76 |
+| FLORA (NVIDIA) | 0.747 | — | — | — | $35.39 |
+
+Best in bold. A failed clip counts 0; — = the system does not produce that annotation; n/r = not reported. Label judge: gemini-3.5-flash.
+
+Subtask score by gold segment length:
+
+| System | All | < 0.5 s | 0.5–1 s | > 1 s |
 |---|---|---|---|---|
-| Perceptron egocentric harness | 0.786 | 0.421 | 0.613 | 0.942 |
-| GPT-6 Astra · 4 fps | 0.798 | 0.498 | 0.749 | 0.979 |
-| GPT-6 Astra · 1 fps | 0.773 | 0.479 | 0.724 | 0.865 |
-| Gemini 3.8 Flash · 4 fps | 0.663 | 0.405 | 0.558 | 0.444 |
-| Gemini 3.8 Flash · 1 fps | 0.639 | 0.390 | 0.557 | 0.522 |
-| Glimpse (Elorian) · 4 fps | 0.682 | 0.390 | 0.560 | 0.489 |
-| Glimpse (Elorian) · 1 fps | 0.590 | 0.353 | 0.560 | 0.247 |
-| Argus (Pantheon) on GPT-6 Astra | 0.362 | 0.336 | 0.593 | — |
-| Argus (Pantheon) on GPT-6.1 Sol | 0.311 | 0.327 | 0.590 | — |
-| NVIDIA FLORA | 0.745 | — | — | — |
+| Perceptron Egocentric, 4 fps (default) | 0.787 | 0.559 | 0.615 | 0.814 |
+| Perceptron Egocentric, 8 fps (option) | **0.798** | 0.555 | **0.672** | 0.824 |
+| GPT-6 Astra, 4 fps frames | 0.797 | 0.503 | 0.649 | **0.831** |
+| GPT-6 Astra, 1 fps frames | 0.775 | **0.595** | 0.500 | 0.807 |
+| Gemini 3.8 Flash, 4 fps video | 0.663 | 0.375 | 0.392 | 0.695 |
+| Gemini 3.8 Flash, 1 fps video | 0.639 | 0.361 | 0.320 | 0.670 |
+| Glimpse (Elorian), 4 fps video | 0.689 | 0.380 | 0.410 | 0.720 |
+| Glimpse (Elorian), 1 fps video | 0.590 | 0.328 | 0.279 | 0.616 |
+| Argus (Pantheon), GPT-6 Astra | 0.367 | 0.135 | 0.133 | 0.381 |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.315 | 0.098 | 0.106 | 0.332 |
+| FLORA (NVIDIA) | 0.747 | 0.579 | 0.615 | 0.777 |
+| Clips with a step of this length | 137 | 24 | 60 | 137 |
 
-A failed clip counts 0; — = the system does not produce that annotation. Label judge: gemini-3.5-flash.
+WGO-Bench, 100 videos, scored with the benchmark's [published rubric](https://macrodata.co/blog/annotating-robot-video-subtasks#grading): matches are pooled across all 100 videos before computing F1.
 
-WGO-Bench, same systems:
-
-| System | Semantic E2E F1 | Segment F1 @ IoU 0.75 |
+| System | Semantic F1 | Segment F1 |
 |---|---|---|
-| Perceptron egocentric harness | 0.310 | 0.401 |
-| GPT-6 Astra · 4 fps | 0.194 | 0.263 |
-| GPT-6 Astra · 1 fps | 0.182 | 0.250 |
-| Gemini 3.8 Flash · 4 fps | 0.167 | 0.280 |
-| Gemini 3.8 Flash · 1 fps | 0.141 | 0.255 |
-| Glimpse (Elorian) · 4 fps | 0.165 | 0.259 |
-| Glimpse (Elorian) · 1 fps | 0.200 | 0.298 |
-| Argus (Pantheon) on GPT-6 Astra | 0.039 | 0.323 |
-| Argus (Pantheon) on GPT-6.1 Sol | 0.036 | 0.296 |
-| NVIDIA FLORA | 0.196 | 0.343 |
+| Midcentury Optimized Argus † | **0.502** | 0.579 |
+| Perceptron Egocentric | 0.474 | **0.583** |
+| Glimpse (Elorian) † | 0.427 | – |
+| GPT-6 Astra † | 0.394 | – |
+| FLORA (NVIDIA) † | ‡ | 0.503 ‡ |
+
+† Self-reported, not reproduced by us. ‡ FLORA reports WGO-Bench results under its own evaluation protocol, so they are not directly comparable: we omit its semantic F1 and show its reported segment F1.
 
 ### Degenerate baselines
 
@@ -129,3 +148,9 @@ egohome/judge.py      Gemini label judge (cached); any (gold, pred) -> bool call
 egohome/evaluate.py   CLI
 tests/                  metric tests
 ```
+
+## License
+
+The EgoHome dataset ([`PerceptronAI/EgoHome`](https://huggingface.co/datasets/PerceptronAI/EgoHome)) is released under the [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license (CC BY-NC 4.0). As an additional permission, anyone, including commercial organizations, may use EgoHome to evaluate models and publish the results. Other commercial uses, such as selling the data or training commercial models on it, are not permitted.
+
+The code in this repository is released under the [Apache License 2.0](LICENSE).
