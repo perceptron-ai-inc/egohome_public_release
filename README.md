@@ -336,7 +336,7 @@ Here is the percentage of time the right and left hand are on screen in the corp
 
 ```bibtex
 @misc{perceptron2026egohome,
-  title={{EgoHome}: benchmarking egocentric video understanding at sub-second resolution},
+  title={Perceptron {EgoHome}: A new benchmark for dense, sub-second egocentric understanding},
   author={{Perceptron}},
   year={2026},
   month={nov},
