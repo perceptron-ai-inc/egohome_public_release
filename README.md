@@ -81,9 +81,9 @@ The table below demonstrates how various predictions would be graded under our m
 | C. “sweeping the stairs” 0–3 s, “putting the broom away” 3–5 s | first piece agrees: (3 + 3) / (5 + 5) = **0.6** | IoU 0.6, below 0.75 → **0.0** |
 | D. “carrying the broom” 0–5 s | judge says it’s a different action → **0.0** | timing matches but the label doesn’t → **0.0** |
 
-**Table 2.** Four model outputs for one human segment, “sweeping the stairs” from 0 to 5 s, scored by permissible subsegment Jaccard and WGO-Bench semantic F1. Solid segments agree with the human label under the judge; dashed segments do not.
+**Table 2.** Four model outputs for one human segment, “sweeping the stairs” from 0 to 5 s, scored by permissible subsegment Jaccard and WGO-Bench semantic F1. The ground-truth track is the human label; the model track is the prediction. Solid segments agree with the ground truth under the judge; dashed segments do not.
 
-While calibrating annotators, we frequently ran into Case B: a valid, more detailed breakdown gets a score of zero under one-to-one matching and full credit under ours. Case C shows we still give partial credit for the part the model got right, where a fixed IoU cutoff gives nothing. (WGO-Bench’s semantic F1 pairs segments one-to-one, counts a pair only when its temporal IoU is at least 0.75 and the judge accepts the labels).
+While calibrating annotators, we frequently ran into Case B, as illustrated in Table 2: a valid, more detailed breakdown gets a score of zero under one-to-one matching and full credit under ours. Case C shows we still give partial credit for the part the model got right, where a fixed IoU cutoff gives nothing. (WGO-Bench’s semantic F1 pairs segments one-to-one, counts a pair only when its temporal IoU is at least 0.75 and the judge accepts the labels).
 
 We found that this metric adhered much more closely to subjective measures of fairness when evaluating human annotators’ performance during calibration, thus we opted to release it as our official metric for the benchmark.
 
@@ -177,7 +177,7 @@ Our benchmark is the only one with sufficient scale of annotations necessary to 
 Mathematically this can be expressed as
 
 $$
-\operatorname{CHF} = \frac{\displaystyle\sum_{(f,h) \in G} \mathbb{1}\left[\operatorname{Centroid}(\hat{p}_{f,h}) \in g_{f,h}\right]}{|G| + |P_{\text{out}}|}
+\mathrm{CHF} = \frac{\displaystyle\sum_{(f,h) \in G} \mathbb{1}\left[\mathrm{Centroid}(\hat{p}_{f,h}) \in g_{f,h}\right]}{|G| + |P_{\text{out}}|}
 $$
 
 Where G is the set of (frame, hand) pairs with a human box at 30 fps and g(f,h) is that box. p̂(f,h) is the model’s box for hand h at frame f: its own box at that frame, or the linear interpolation between its two nearest boxes; frames outside the span the model covered count as misses. P_out is the set of predicted boxes outside the frames the human labels cover, and the indicator is 1 when the centroid of p̂(f,h) falls inside g(f,h).
@@ -187,7 +187,7 @@ Where G is the set of (frame, hand) pairs with a human box at 30 fps and g(f,h) 
 It can be expressed mathematically as follows:
 
 $$
-\operatorname{PSJ}(P, T) = \frac{\displaystyle\sum_{p \in P} m(p, T) + \sum_{t \in T} m(t, P)}{\displaystyle\sum_{p \in P} |I(p)| + \sum_{t \in T} |I(t)|}
+\mathrm{PSJ}(P, T) = \frac{\displaystyle\sum_{p \in P} m(p, T) + \sum_{t \in T} m(t, P)}{\displaystyle\sum_{p \in P} |I(p)| + \sum_{t \in T} |I(t)|}
 $$
 
 $$
@@ -337,7 +337,7 @@ Here is the percentage of time the right and left hand are on screen in the corp
 ```bibtex
 @misc{perceptron2026egohome,
   title={Perceptron {EgoHome}: A new benchmark for dense, sub-second egocentric understanding},
-  author={{Perceptron}},
+  author={{PerceptronAI}},
   year={2026},
   month={nov},
   url={https://www.perceptron.inc/blog/egohome}
