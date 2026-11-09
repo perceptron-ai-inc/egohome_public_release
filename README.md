@@ -11,6 +11,8 @@ Evaluation code for **EgoHome-2h**, 137 human-annotated egocentric household-cho
 
 Dataset: [`PerceptronAI/EgoHome`](https://huggingface.co/datasets/PerceptronAI/EgoHome)
 
+**License:** code MIT; dataset CC BY-NC 4.0, with evaluation use permitted (see [License](#license)).
+
 ## Install
 
 ```bash
@@ -153,4 +155,4 @@ tests/                  metric tests
 
 The EgoHome dataset ([`PerceptronAI/EgoHome`](https://huggingface.co/datasets/PerceptronAI/EgoHome)) is released under the [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license (CC BY-NC 4.0). As an additional permission, anyone, including commercial organizations, may use EgoHome to evaluate models and publish the results. Other commercial uses, such as selling the data or training commercial models on it, are not permitted.
 
-The code in this repository is released under the [Apache License 2.0](LICENSE).
+The code in this repository is released under the [MIT License](LICENSE).
