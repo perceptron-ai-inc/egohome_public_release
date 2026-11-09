@@ -118,18 +118,6 @@ Subtask score by gold segment length:
 | FLORA (NVIDIA) | 0.747 | 0.579 | 0.615 | 0.777 |
 | Clips with a step of this length | 137 | 24 | 60 | 137 |
 
-WGO-Bench, 100 videos, scored with the benchmark's [published rubric](https://macrodata.co/blog/annotating-robot-video-subtasks#grading): matches are pooled across all 100 videos before computing F1.
-
-| System | Semantic F1 | Segment F1 |
-|---|---|---|
-| Midcentury Optimized Argus † | **0.502** | 0.579 |
-| Perceptron Egocentric | 0.474 | **0.583** |
-| Glimpse (Elorian) † | 0.427 | – |
-| GPT-6 Astra † | 0.394 | – |
-| FLORA (NVIDIA) † | ‡ | 0.503 ‡ |
-
-† Self-reported, not reproduced by us. ‡ FLORA reports WGO-Bench results under its own evaluation protocol, so they are not directly comparable: we omit its semantic F1 and show its reported segment F1.
-
 ### Degenerate baselines
 
 Answers that ignore the video, scored with the same metrics and judge.
