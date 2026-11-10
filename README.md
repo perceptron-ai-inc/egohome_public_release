@@ -1,6 +1,6 @@
 # EgoHome: prompts and metrics
 
-Evaluation code for **EgoHome-2h**, 137 human-annotated egocentric household-chore clips (1.99 h, 1920×1080, 30 fps) with four annotation types on the same videos.
+Evaluation code for **EgoHome**, a dataset of 137 egocentric clips of household chores. The clips total 1.99 hours of 1920×1080 video at 30 fps, and each clip has four types of human annotation.
 
 | Task | Column | Unit | Metric |
 |---|---|---|---|
