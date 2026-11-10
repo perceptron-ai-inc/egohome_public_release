@@ -101,6 +101,8 @@ EgoHome, all 137 clips (higher is better; cost lower is better):
 
 Best in bold. A failed clip counts 0; — = the system does not produce that annotation; n/r = not reported. Label judge: gemini-3.5-flash.
 
+Inputs: GPT-6 Astra as timestamped frames (768 px), Gemini and Glimpse as native video. Perceptron results are averaged across three runs at 4 fps and two runs at 8 fps; other systems were run once. Gemini stamps its boxes half a sampling interval early, so its hand box scores use timestamps shifted by 0.5 s at 1 fps and 0.125 s at 4 fps. Subtask $ uses Perceptron's customer price, direct API charges, or FLORA's GPU runtime cost; Argus costs also include hand labels, and costs marked ≈ are estimates of the subtask share of a run billed across all tasks.
+
 Subtask score by gold segment length:
 
 | System | All | < 0.5 s | 0.5–1 s | > 1 s |
@@ -117,6 +119,34 @@ Subtask score by gold segment length:
 | Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.315 | 0.098 | 0.106 | 0.332 |
 | FLORA (NVIDIA) | 0.747 | 0.579 | 0.615 | 0.777 |
 | Clips with a step of this length | 137 | 24 | 60 | 137 |
+
+Hand action score by gold segment length:
+
+| System | All | < 0.5 s | 0.5–1 s | > 1 s |
+|---|---|---|---|---|
+| Perceptron Egocentric, 4 fps (default) | 0.421 | 0.298 | 0.286 | 0.461 |
+| GPT-6 Astra, 4 fps frames | **0.498** | **0.422** | **0.415** | **0.531** |
+| GPT-6 Astra, 1 fps frames | 0.479 | 0.341 | 0.355 | 0.520 |
+| Gemini 3.8 Flash, 4 fps video | 0.405 | 0.206 | 0.273 | 0.435 |
+| Gemini 3.8 Flash, 1 fps video | 0.390 | 0.191 | 0.252 | 0.436 |
+| Glimpse (Elorian), 4 fps video | 0.390 | 0.193 | 0.212 | 0.433 |
+| Glimpse (Elorian), 1 fps video | 0.353 | 0.212 | 0.185 | 0.392 |
+| Argus (Pantheon), GPT-6 Astra | 0.336 | 0.321 | 0.268 | 0.358 |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.327 | 0.262 | 0.205 | 0.355 |
+
+Hand caption score by gold segment length:
+
+| System | All | < 0.5 s | 0.5–1 s | > 1 s |
+|---|---|---|---|---|
+| Perceptron Egocentric, 4 fps (default) | 0.613 | 0.447 | 0.446 | 0.678 |
+| GPT-6 Astra, 4 fps frames | **0.749** | **0.560** | **0.642** | **0.830** |
+| GPT-6 Astra, 1 fps frames | 0.724 | 0.415 | 0.575 | 0.800 |
+| Gemini 3.8 Flash, 4 fps video | 0.558 | 0.343 | 0.379 | 0.618 |
+| Gemini 3.8 Flash, 1 fps video | 0.557 | 0.295 | 0.383 | 0.619 |
+| Glimpse (Elorian), 4 fps video | 0.560 | 0.281 | 0.351 | 0.625 |
+| Glimpse (Elorian), 1 fps video | 0.560 | 0.264 | 0.337 | 0.631 |
+| Argus (Pantheon), GPT-6 Astra | 0.593 | 0.414 | 0.490 | 0.647 |
+| Argus (Pantheon), Midcentury's settings: GPT-6.1 Sol | 0.590 | 0.433 | 0.441 | 0.648 |
 
 ### Degenerate baselines
 
@@ -137,6 +167,18 @@ egohome/prompts.py    task prompts and the label-judge prompt
 egohome/judge.py      Gemini label judge (cached); any (gold, pred) -> bool callable works
 egohome/evaluate.py   CLI
 tests/                  metric tests
+```
+
+## Citation
+
+```bibtex
+@article{perceptron2026egohome,
+  author  = {PerceptronAI},
+  title   = {Perceptron EgoHome: A new benchmark for dense, sub-second egocentric understanding},
+  journal = {PerceptronAI Research Blog},
+  year    = {2026},
+  note    = {https://perceptron.inc/blog/egohome},
+}
 ```
 
 ## License
