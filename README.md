@@ -54,10 +54,10 @@ The prompts we use for every task are in [`egohome/prompts.py`](egohome/prompts.
 
 For each hand $h$, the prediction is a box track $\hat b_h(f)$, linearly interpolated between the predicted frames $f$ and undefined outside them. Let $\mathcal G$ be the gold (frame, hand) pairs with gold box $b_{f,h}$, and let $\mathcal E$ be the predicted boxes outside the time range of their hand's gold track. Then
 
-$$
+```math
 \mathrm{CHF} \;=\; \frac{\big|\{(f,h)\in\mathcal G \;:\; \hat b_h(f)\ \text{defined} \;\wedge\; c(\hat b_h(f)) \in \mathrm{int}\, b_{f,h}\}\big|}{|\mathcal G| + |\mathcal E|},
 \qquad c(b) = \Big(\tfrac{x_1+x_2}{2}, \tfrac{y_1+y_2}{2}\Big).
-$$
+```
 
 Because of the interpolation the score does not depend on the prediction's frame rate: a 1 fps track scores the same as a 30 fps one wherever the hand moves linearly between samples.
 
@@ -65,15 +65,15 @@ Because of the interpolation the score does not depend on the prediction's frame
 
 On a track $k$ (the single subtask track, or each hand), gold segments $g$ and predicted segments $p$ *agree* when they overlap and their labels are accepted as the same activity:
 
-$$
+```math
 A(g,p) = \mathbb 1\big[\,|g\cap p|>0 \;\wedge\; J(\ell_g,\ell_p)\,\big]
-$$
+```
 
 $J$ is the LLM judge for subtasks and captions. For actions, $J$ checks that both labels normalize to the same Ego4D verb class, and a verb outside the set never matches.
 
-$$
+```math
 \mathrm{PSJ} \;=\; \frac{\displaystyle\sum_k\Big(\sum_{p\in P_k}\Big|\bigcup_{g:\,A(g,p)} g\cap p\Big| \;+\; \sum_{g\in G_k}\Big|\bigcup_{p:\,A(g,p)} g\cap p\Big|\Big)}{\displaystyle\sum_k\Big(\sum_{p\in P_k}|p| \;+\; \sum_{g\in G_k}|g|\Big)}
-$$
+```
 
 Each predicted second is credited when some gold segment covering it agrees, and each gold second likewise. A prediction that splits a gold segment into finer, equally valid steps, or merges several into one, still scores 1. Label errors and timing errors both cost time on both sides.
 
